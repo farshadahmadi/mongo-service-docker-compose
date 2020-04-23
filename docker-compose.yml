@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  mongodb:
+    container_name: vidly_mongodb_1
+    hostname: ${MONGO_DB_HOST}
+    image: mongo
+    restart: unless-stopped
+    #env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - vidly_db_data:/data/db
+      # - /data/db
+    ports:
+      - ${MONGO_DB_PORT}:27017
+    # networks:
+    #   - wd-backend-palnning
+
+# networks:
+#   wd-backend-palnning:
+#     driver: bridge
+
+volumes:
+  vidly_db_data:
